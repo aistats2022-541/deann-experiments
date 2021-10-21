@@ -1,0 +1,94 @@
+ann-faiss:
+  constructor: ANNFaiss
+  wrapper: deann_wrapper
+  docker: deann-experiments-deann
+  query:
+  - [[10, 50], [0, 50, 100], [512], [1, 5, 10, 50]]
+ann-permuted-faiss:
+  constructor: ANNPermutedFaiss
+  wrapper: deann_wrapper
+  docker: deann-experiments-deann
+  query:
+  - [[10, 50], [0, 50, 100], [512], [1, 5, 10, 50]]
+askit:
+  constructor: Askit 
+  wrapper: askit 
+  docker: deann-experiments-askit
+  separate-queries: True
+  query:
+      #- [[100], [0.00001, 0.001], [512], [5], [2048], [2], [0], [2]] 
+  - [[100], [0.00001, 0.001], [512], [5], [512, 2048, 8096], [2, 4, 16], [0, 10], [2, 4, 10]] 
+hbe:
+  args:
+    binary: hbe
+  constructor: HBEEstimator
+  wrapper: hbe 
+  separate-queries: True
+  docker: deann-experiments-hbe
+  query:
+  - [[0.75, 1.0, 2.0, 3.0], [0.0001]]
+naive:
+  constructor: Naive
+  wrapper: deann_wrapper
+
+sklearn-balltree:
+  constructor: SklearnBallTreeEstimator
+  wrapper: sklearn
+  docker: deann-experiments-sklearn
+  query:
+  - - 10
+    - 0.0
+    - 0.0
+  - - 100
+    - 0.0
+    - 0.5
+rs:
+  constructor: RandomSampling
+  wrapper: deann_wrapper
+  docker: deann-experiments-deann
+  query: &id001
+  - 10
+  - 30
+  - 50
+  - 100
+  - 200
+  - 300
+  - 400
+  - 500
+  - 1000
+  - 1100
+  - 1200
+  - 1300
+  - 1400
+  - 1500
+  - 1600
+  - 1700
+  - 1800
+  - 1900
+  - 2000
+  - 3000
+  - 4000
+  - 5000
+  - 6000
+  - 7000
+  - 8000
+  - 9000
+  - 10000
+  - 15000
+  - 20000
+  - 50000
+random-sampling:
+  args:
+    binary: hbe
+  constructor: RSEstimator
+  wrapper: hbe
+  docker: deann-experiments-hbe
+  query:
+    - - 0.5
+      - 0.0001
+rsp:
+  constructor: RandomSamplingPermuted
+  wrapper: deann_wrapper
+  docker: deann-experiments-deann
+  query: *id001
+

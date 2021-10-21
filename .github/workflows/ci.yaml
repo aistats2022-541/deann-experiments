@@ -1,0 +1,24 @@
+name: Deann Experiments 
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2 # Pull the repository
+
+    - name: Install 
+      run: |
+          pip3 install -r requirements.txt
+          python3 install.py
+        
+        
+    - name: Run experiments on shuttle
+      run: | 
+          python3 run_exp.py --algorithm ann-faiss --cpu 0
+          python3 data_export.py -o res.csv
+          python3 additional/tabulate_results.py -i res.csv show-best
+
+
